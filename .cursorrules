@@ -1,0 +1,39 @@
+# MxitX AI Development Guidelines (Supabase Edition)
+
+## Project Goal
+Build a real-time social chat web app named **MxitX** using React (Vite) + Tailwind CSS + Supabase.
+
+## Core Tech Stack
+- Frontend: React + Vite + Tailwind CSS
+- Backend/DB: Supabase (Auth, PostgreSQL, Realtime)
+
+## Database Schemas (PostgreSQL)
+
+1. `profiles` table:
+   - `id` (uuid, references auth.users)
+   - `username` (text)
+   - `mx_pin` (text, format: "MX-XXXXX")
+   - `status` (text)
+   - `presence` (text: "online" | "away" | "offline")
+   - `now_playing` (jsonb)
+
+2. `chat_rooms` table:
+   - `id` (uuid)
+   - `name` (text)
+   - `category` (text)
+   - `created_at` (timestamp)
+
+3. `messages` table:
+   - `id` (uuid)
+   - `room_id` (uuid, references chat_rooms.id)
+   - `sender_id` (uuid, references profiles.id)
+   - `sender_handle` (text)
+   - `sender_mx_pin` (text)
+   - `text` (text)
+   - `is_ping` (boolean)
+   - `created_at` (timestamp)
+
+## Rules
+- Keep code clean, modular, and use functional React components.
+- Do not introduce extra state management libraries (use React Context / native state).
+- Ensure low data overhead and snappy UI responses.
